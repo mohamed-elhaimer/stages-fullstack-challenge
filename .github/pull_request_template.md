@@ -15,12 +15,10 @@
 
 ### Solution implémentée
 
-[Décrivez votre correction avec détails techniques]
+[Décrivez votre correction avec détails techniques, incluez les fichiers modifiés et configurations changées]
 
-**Changements effectués** :
-- [Liste des modifications]
-- [Fichiers modifiés]
-- [Configurations changées]
+**Exemple** :
+> J'ai modifié la migration `create_articles_table.php` pour changer la collation de `latin1_general_ci` vers `utf8mb4_unicode_ci`. J'ai également mis à jour `config/database.php` pour forcer utf8mb4 par défaut.
 
 **Code clé (optionnel)** :
 ```php
@@ -40,15 +38,17 @@
 
 ---
 
-### Réponse aux questions à considérer
+### Réponses aux questions à considérer
 
-[Répondez aux questions posées dans TICKETS.md pour ce ticket]
+[Répondez aux questions posées dans TICKETS.md pour ce ticket. Numérotez vos réponses.]
 
-**Question 1** : [Question copiée de TICKETS.md]
+**Q1** : [Première question du ticket]
 > [Votre réponse]
 
-**Question 2** : [Question copiée de TICKETS.md]
+**Q2** : [Deuxième question du ticket]  
 > [Votre réponse]
+
+*(Ajoutez autant de questions/réponses que nécessaire selon le ticket)*
 
 ---
 
@@ -60,7 +60,7 @@ Environ X heures
 
 ### Difficultés rencontrées (optionnel)
 
-[Mentionnez les blocages et comment vous les avez résolus]
+[Mentionnez les blocages éventuels et comment vous les avez résolus - laissez vide si aucune difficulté]
 
 ---
 

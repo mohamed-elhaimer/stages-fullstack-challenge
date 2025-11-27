@@ -462,6 +462,18 @@ git push origin BUG-001
 
 Sur GitHub, créez une PR de `BUG-001` vers `main` (dans votre fork).
 
+⚠️ **IMPORTANT** : Lors de la création de la PR sur GitHub :
+
+1. **Assurez-vous que "base repository" pointe vers VOTRE fork**, pas vers `voidagency`
+   - Base : `votre-username/stages-fullstack-challenge` → `main`
+   - Compare : `votre-username/stages-fullstack-challenge` → `BUG-001`
+   
+2. Si GitHub affiche `voidagency/stages-fullstack-challenge` comme base, **cliquez dessus et changez-le** pour pointer vers votre fork
+
+**Pourquoi ?** Vos PRs doivent rester dans votre fork pour que vous puissiez les merger. Ne créez pas de PRs vers le repo original.
+
+---
+
 **Titre de la PR** : `[BUG-001] La recherche ne fonctionne pas avec les accents`
 
 GitHub affichera automatiquement le template `.github/pull_request_template.md`.

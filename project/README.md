@@ -23,7 +23,7 @@ docker ps
 docker exec -it blog_backend composer install
 
 # 5. Setup Laravel
-docker exec -it blog_backend cp env.example .env
+docker exec -it blog_backend cp .env.example .env
 docker exec -it blog_backend php artisan key:generate
 
 # 6. Run migrations and seeders

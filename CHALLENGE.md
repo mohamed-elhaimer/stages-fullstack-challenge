@@ -49,7 +49,7 @@ Les tickets couvrent :
 ## 🛠️ Technologies & Stack Technique
 
 ### Backend
-- **PHP 8.2** (avec quelques syntaxes PHP 7.4 à corriger)
+- **PHP 7.4**
 - **Laravel 10.x**
 - **MySQL 8.0**
 
@@ -311,10 +311,10 @@ Si vous atteignez le seuil requis (70%), vous serez invité à un **entretien te
 | **Phase 2 - Sécurité critique** | 2-3h | SEC-001, SEC-002 | 2 tickets critiques |
 | **Phase 3 - Performance** | 2h | PERF-001, PERF-003 | 2 tickets moyens |
 | **Phase 4 - Complexe** | 2-3h | BUG-003, SEC-003, PERF-002 | 3 tickets difficiles |
-| **Documentation** | 1h | Rédaction des Pull Requests | - |
+| **Documentation** | 1-2h | Rédaction des Pull Requests (10-15 min/ticket) | - |
 | **Tests finaux** | 30min | Vérification globale | - |
 
-**Total réaliste : 8-10h pour 7-8 tickets résolus**
+**Total réaliste : 8-11h pour 7-8 tickets résolus**
 
 ### Format flexible
 
