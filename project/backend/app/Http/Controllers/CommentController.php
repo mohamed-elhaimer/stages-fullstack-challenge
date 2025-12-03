@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CommentController extends Controller
 {
@@ -35,9 +36,9 @@ class CommentController extends Controller
         $comment = Comment::create($validated);
         $comment->load('user');
 
-        return response()->json($comment, 201);
-    }
-
+        // Invalidate cache
+        Cache::forget('articles_list');
+        Cache::forget('articles_list_performance_test');
     /**
      * Remove the specified comment.
      */
@@ -51,7 +52,17 @@ class CommentController extends Controller
         $remainingComments = Comment::where('article_id', $articleId)->get();
         $firstComment = $remainingComments->first();
 
+        // Invalidate cache
+        Cache::forget('articles_list');
+        Cache::forget('articles_list_performance_test');
+        Cache::forget('stats');
+
         return response()->json([
+            'message' => 'Comment deleted successfully',
+            'remaining_count' => $remainingComments->count(),
+            'first_remaining' => $firstComment,
+        ]);
+    }   return response()->json([
             'message' => 'Comment deleted successfully',
             'remaining_count' => $remainingComments->count(),
             'first_remaining' => $firstComment,

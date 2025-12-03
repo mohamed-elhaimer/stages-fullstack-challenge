@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
@@ -13,25 +14,34 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $articles = Article::with(['author', 'comments'])->get();
+        $cacheKey = 'articles_list';
+        $hasPerformanceTest = $request->has('performance_test');
+        
+        if ($hasPerformanceTest) {
+            $cacheKey .= '_performance_test';
+        }
 
-        $articles = $articles->map(function ($article) use ($request) {
-            if ($request->has('performance_test')) {
-                usleep(30000); // 30ms par article pour simuler le coût du N+1
-            }
+        return Cache::remember($cacheKey, 60, function () use ($request, $hasPerformanceTest) {
+            $articles = Article::with(['author', 'comments'])->get();
 
-            return [
-                'id' => $article->id,
-                'title' => $article->title,
-                'content' => substr($article->content, 0, 200) . '...',
-                'author' => $article->author->name,
-                'comments_count' => $article->comments->count(),
-                'published_at' => $article->published_at,
-                'created_at' => $article->created_at,
-            ];
+            $articles = $articles->map(function ($article) use ($hasPerformanceTest) {
+                if ($hasPerformanceTest) {
+                    usleep(30000); // 30ms par article pour simuler le coût du N+1
+                }
+
+                return [
+                    'id' => $article->id,
+                    'title' => $article->title,
+                    'content' => substr($article->content, 0, 200) . '...',
+                    'author' => $article->author->name,
+                    'comments_count' => $article->comments->count(),
+                    'published_at' => $article->published_at,
+                    'created_at' => $article->created_at,
+                ];
+            });
+
+            return $articles;
         });
-
-        return response()->json($articles);
     }
 
     /**
@@ -106,6 +116,11 @@ class ArticleController extends Controller
             'image_path' => $validated['image_path'] ?? null,
             'published_at' => now(),
         ]);
+
+        // Invalidate cache
+        Cache::forget('articles_list');
+        Cache::forget('articles_list_performance_test');
+        Cache::forget('stats');
 
         return response()->json($article, 201);
     }
